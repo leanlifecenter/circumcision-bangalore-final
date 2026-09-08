@@ -14,6 +14,63 @@
 </style>
 </head>
 <body>
+    <script>
+document.getElementById("leadForm").addEventListener("submit", function(event) {
+
+    // Stop the form from refreshing the page
+    event.preventDefault();
+
+    // Get the values entered by the visitor
+    const name = document.getElementById("name").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const location = document.getElementById("location").value;
+    const message = document.getElementById("message").value.trim();
+
+    // Basic validation
+    if (!name || !phone || !location) {
+        alert("Please enter your name, phone number and preferred location.");
+        return;
+    }
+
+    // Optional phone number validation
+    const phonePattern = /^[0-9+\-\s()]{10,15}$/;
+
+    if (!phonePattern.test(phone)) {
+        alert("Please enter a valid phone number.");
+        return;
+    }
+
+    // Dr Uday Ravi WhatsApp number
+    const whatsappNumber = "917353530505";
+
+    // Create the WhatsApp message
+    const whatsappMessage =
+`Hello Dr Uday Ravi,
+
+I would like to book a consultation for circumcision.
+
+Patient Details:
+-------------------------
+Name: ${name}
+Phone: ${phone}
+Preferred Location: ${location}
+Message: ${message || "Not provided"}
+-------------------------
+
+Please contact me regarding the consultation.`;
+
+    // Encode the message so it works correctly in WhatsApp
+    const encodedMessage = encodeURIComponent(whatsappMessage);
+
+    // Create WhatsApp URL
+    const whatsappURL =
+        "https://wa.me/" + whatsappNumber + "?text=" + encodedMessage;
+
+    // Open WhatsApp in a new tab
+    window.open(whatsappURL, "_blank");
+
+});
+</script>
 <div class="top"><b>Dr. Uday Ravi</b> • Circumcision treatment in Bangalore • Private & confidential consultation</div>
 
 <header class="nav">
